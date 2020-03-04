@@ -1,0 +1,28 @@
+{
+  "name": "yc-smart-contract",
+  "version": "1.0.0",
+  "description": "yallah clean smart contract. Yallah clean is a new innovative model for Garbage collection cycle based on blockchain",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmanHerawy/yc-smart-contract.git"
+  },
+  "keywords": [
+    "ethereum",
+    "smartcontract",
+    "truffle",
+    "web3"
+  ],
+  "author": "Eman Herawy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EmanHerawy/yc-smart-contract/issues"
+  },
+  "homepage": "https://github.com/EmanHerawy/yc-smart-contract#readme"
+}
