@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/EmanHerawy/yc-smart-contract/issues"
   },
-  "homepage": "https://github.com/EmanHerawy/yc-smart-contract#readme"
+  "homepage": "https://github.com/EmanHerawy/yc-smart-contract#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^2.5.0"
+  }
 }
