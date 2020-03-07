@@ -1,9 +1,8 @@
 pragma solidity ^0.5.0;
 
-import "node_modules/@openzeppelin/contracts/GSN/Context.sol";
 import "node_modules/@openzeppelin/contracts/access/Roles.sol";
 
-contract YCAdminRole is Context {
+contract YCAdminRole  {
     using Roles for Roles.Role;
 
     event YCAdminAdded(address indexed account);
@@ -12,11 +11,11 @@ contract YCAdminRole is Context {
     Roles.Role private _YCAdmins;
 
     constructor () internal {
-        _addYCAdmin(_msgSender());
+        _addYCAdmin(msg.sender);
     }
 
     modifier onlyYCAdmin() {
-        require(isYCAdmin(_msgSender()), "YCAdminRole: caller does not have the YCAdmin role");
+        require(isYCAdmin(msg.sender), "YCAdminRole: caller does not have the YCAdmin role");
         _;
     }
 
@@ -29,7 +28,7 @@ contract YCAdminRole is Context {
     }
 
     function renounceYCAdmin() public {
-        _removeYCAdmin(_msgSender());
+        _removeYCAdmin(msg.sender);
     }
 
     function _addYCAdmin(address account) internal {

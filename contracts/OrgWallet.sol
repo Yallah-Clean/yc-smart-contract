@@ -1,8 +1,8 @@
 pragma solidity ^0.5.0;
-import 'node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import 'node_modules/@openzeppelin/contracts/utils/ReentrancyGuard.sol';
-import 'node_modules/@openzeppelin/contracts/GSN/Context.sol';
-import 'node_modules/@openzeppelin/contracts/math/SafeMath.sol';
+import '../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import '../node_modules/@openzeppelin/contracts/utils/ReentrancyGuard.sol';
+import '../node_modules/@openzeppelin/contracts/GSN/Context.sol';
+import '../node_modules/@openzeppelin/contracts/math/SafeMath.sol';
 
 
 contract OrgWallet is  Context, ReentrancyGuard{
@@ -33,32 +33,6 @@ contract OrgWallet is  Context, ReentrancyGuard{
         _token = token;
 }
 
-
-
-   function rate() public view returns (uint256) {
-            return _rate;
-      }
-
-
-// setter functions     
-function manageTrashType(uint  code,string memory name,string memory UnitName,uint unitMaltiplier, uint price) public returns (bool) {
-    
-    trashList[code] = TrashDetails ( name, UnitName, unitMaltiplier, price);
-    return true;
-}
-function residentRedeemToken(uint points) external returns (bool ) {
-    require(_msgSender()==userFactory.isCollector(_msgSender())
-    ||_msgSender()==userFactory.isResident(_msgSender()),"sender must be resident or collector wallet");
-    pointRaised.add(points);
-    _transferTokens(_msgSender(),points);
-    return true;
-}
-
-function approve() public onlyAdmin() returns (bool) {
-    
-status = true;
-    return true;
-}
 
 
 
@@ -112,7 +86,6 @@ status = true;
         _processPurchase(beneficiary, tokens);
         emit TokensPurchased(_msgSender(), beneficiary, pointAmount, tokens);
 
-        _updatePurchasingState(beneficiary, pointAmount);
 
     }
        /**
@@ -122,7 +95,7 @@ status = true;
      */
     function _postValidatePurchase(uint256 pointAmount) internal view {
         // solhint-disable-previous-line no-empty-blocks
-               require(_token.balanceOf(this) > pointAmount,"insufficient funds");
+               require(_token.balanceOf(address(this)) > pointAmount,"insufficient funds");
 
     }
 
@@ -149,7 +122,7 @@ status = true;
      * @param tokenAmount Number of tokens to be emitted
      */
     function _deliverTokens(address beneficiary, uint256 tokenAmount) internal {
-        _token.safeTransfer(beneficiary, tokenAmount);
+        _token.transfer(beneficiary, tokenAmount);
     }
 
     /**
@@ -172,7 +145,7 @@ status = true;
      * @return Number of tokens that can be purchased with the specified _pointAmount
      */
     function _getTokenAmount(uint256 pointAmount) internal view returns (uint256) {
-        return pointAmount.mul(_rate);
+        return pointAmount.div(_rate);
     }
   
 }
