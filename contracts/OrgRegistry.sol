@@ -27,11 +27,11 @@ contract OrgRegistry is Ownable ,   OrgWallet , DeliverableService{
 
 
 
-    constructor(address _owner, YCAdminRole _admin,IERC20 token,UserFactory _userFactory,uint256 rate) OrgWallet( token, rate)public{
+    constructor(address _owner, YCAdminRole _admin,IERC20 token, uint256 rate) OrgWallet( token, rate)public{
         _transferOwnership(_owner);
         admin = _admin;
        
-        userFactory = _userFactory;
+        userFactory = new UserFactory( _owner,  _admin,this);
 }
 
 // modifier

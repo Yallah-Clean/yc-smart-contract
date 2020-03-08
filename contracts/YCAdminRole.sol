@@ -10,7 +10,7 @@ contract YCAdminRole  {
 
     Roles.Role private _YCAdmins;
 
-    constructor () internal {
+    constructor () public {
         _addYCAdmin(msg.sender);
     }
 
