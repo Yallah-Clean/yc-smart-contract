@@ -48,17 +48,17 @@ function approveCollector(bool status) public onlyOrg() returns (bool) {
             raisedPoints.add(points);
             points.add(currentPoints);
             currentPoints = points.mod(orgRegistry.rate());
-            orgRegistry.confirmPickup(bhash, points.sub(currentPoints));
+            orgRegistry.confirmPickup(bhash, points.sub(currentPoints),owner());
             return true;
     }
    function collectorSubmitRequest(string memory location,uint256 time)public onlyCollector() returns (bool) {
         emit  CollectorSubmitRequest(msg.sender ,blockhash(block.number), location, time);
         return true;
     }
-      function collectorAddDelivery(uint256 location,uint256 time, uint256 code, uint256 amount,
+      function collectorAddDelivery(string memory location,uint256 time, uint256 code, uint256 amount,
       address _resident,uint256 mapHash)public onlyCollector() returns (bool) {
      require(orgRegistry.addDelivery( location, time,  code,  amount,
-        _resident, mapHash ),"calling addDeliverables function has issues ");
+        _resident, mapHash ,owner()),"calling addDeliverables function has issues ");
         return true;
     }   
      function OrgConfirm( uint256 bhash)public onlyOrg() returns (bool) {
@@ -67,7 +67,7 @@ function approveCollector(bool status) public onlyOrg() returns (bool) {
             raisedPoints.add(points);
             points.add(currentPoints);
             currentPoints = points.mod(orgRegistry.rate());
-            orgRegistry.validateDeliverables(bhash, points.sub(currentPoints));
+            orgRegistry.validateDeliverables(bhash, points.sub(currentPoints),owner());
             return true;
     }
 }

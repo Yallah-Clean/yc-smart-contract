@@ -10,14 +10,14 @@ import './DeliverableService.sol';
 
 contract OrgRegistry is Ownable ,   OrgWallet , DeliverableService{
     using SafeMath for uint256;
-    YCAdminRole admin ;
-    UserFactory userFactory ;
+    YCAdminRole public admin ;
+    UserFactory public userFactory ;
     
     // var
     uint256 public residentRate =2;
     uint256 public collectorRate = 8;
     bool status ;
-     mapping   (uint=>TrashDetails) public trashList;
+     mapping   (uint256=>TrashDetails) public trashList;
     struct TrashDetails{
         string name;
         string UnitName;
@@ -39,12 +39,12 @@ modifier onlyAdmin() {
     require(admin.isYCAdmin(_msgSender()),"onlyAdmin: caller does not have the YCAdmin role");
     _;
 }
-modifier onlyCollector() {
-    require(!userFactory.isNewCollector(_msgSender()),"onlyCollector: caller does not have the Collector role");
+modifier onlyCollector(address account) {
+    require(userFactory.getCollector(account)==_msgSender(),"onlyCollector: caller does not have the Collector role");
     _;
 }
-modifier onlyResident() {
-    require(!userFactory.isNewResident(_msgSender()),"onlyResident: caller does not have the Resident role");
+modifier onlyResident(address account) {
+    require(userFactory.getResident(account)==_msgSender(),"onlyResident: caller does not have the Resident role");
     _;
 }
 modifier isApproved() {
@@ -54,13 +54,13 @@ modifier isApproved() {
 
 
 
-function calcCollectorPoints(uint256  code, uint256 amount) public returns (uint256) {
-    
-    return  trashList[code].price.mul(amount.div(trashList[code].unitMaltiplier)).mul(collectorRate/10);
+function calcCollectorPoints(uint256  code, uint256 amount) public view returns (uint256) {
+
+    return  trashList[code].price.mul(amount.div(trashList[code].unitMaltiplier)).mul(collectorRate).div(10);
 }
-function calcResidentPoints(uint256  code, uint256 amount) public returns (uint256) {
-    
-    return  trashList[code].price.mul(amount.div(trashList[code].unitMaltiplier)).mul(residentRate/10);
+function calcResidentPoints(uint256  code, uint256 amount) public view returns (uint256) {
+ 
+    return  trashList[code].price.mul(amount.div(trashList[code].unitMaltiplier)).mul(residentRate).div(10);
 }
 
 // setter functions     
@@ -80,8 +80,8 @@ status = true;
     return true;
 }
 
-       function addDelivery(uint256 location,uint256 time, uint256 code, uint256 amount,
-       address residnet,uint256 mapHash ) external onlyCollector() returns (bool) {
+       function addDelivery(string calldata location,uint256 time, uint256 code, uint256 amount,
+       address residnet,uint256 mapHash , address account ) external onlyCollector(account) returns (bool) {
         
         require(_addDelivery(mapHash, _msgSender(), residnet,
      location, time, code, amount)," calling _addDeliverables function has issues ");
@@ -90,13 +90,13 @@ status = true;
 
     }
 
-    function validateDeliverables( uint256  mapHash, uint256 points)external  onlyCollector()  returns (bool) {
+    function validateDeliverables( uint256  mapHash, uint256 points, address account )external  onlyCollector(account)  returns (bool) {
          require(_validateDeliverables(mapHash, true)," calling _validateDeliverables function has issues ");
                 _redeemToken(points);
 
         return true;
     }
-    function confirmPickup( uint256  mapHash,uint256 points)external onlyResident() returns (bool) {
+    function confirmPickup( uint256  mapHash,uint256 points , address account )external onlyResident(account) returns (bool) {
                 require(_confirmPickup(mapHash,true),"calling _validateDeliverables function has issues ");
                 _redeemToken(points);
 

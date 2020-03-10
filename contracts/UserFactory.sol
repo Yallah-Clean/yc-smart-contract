@@ -37,37 +37,46 @@ modifier OnlyNewCollector(address collector) {
     _;
 }
 modifier OnlyBusinessPartner(address businessPartner) {
-    require(!isBusinessPartners(businessPartner),"OnlyBusinessPartner: Business Partner is already exist ");
+    require(isNewBusinessPartners(businessPartner),"OnlyBusinessPartner: Business Partner is already exist ");
     _;
 }
 
-function isNewResident(address user) public returns (bool) {
+function isNewResident(address user) public view returns (bool) {
     return residents[user] == address(0);
 }
-function isNewCollector(address user) public returns (bool) {
+function isNewCollector(address user) public  view returns (bool) {
     return collectors[user] == address(0);
 }
-function isBusinessPartners(address user) public returns (bool) {
+function isNewBusinessPartners(address user) public view returns (bool) {
     return businessPartners[user] == address(0);
 }
+function getResident(address user) public view returns (address) {
+    return residents[user];
+}
+function getCollector(address user) public view returns (address) {
+    return collectors[user] ;
+}
+function getBusinessPartners(address user) public view returns (address) {
+    return businessPartners[user] ;
+}
 // setter functions     
-function addResident(address resident) public OnlyNewResident(resident) returns (bool) {
+function addResident(address resident) public OnlyNewResident(resident) returns (address) {
     // create new contract
   
         residents[resident] = address(new UserWallet(resident,orgRegistry));
 
-    return true;
+    return residents[resident];
 }
-function addCollector(address collector) public OnlyNewCollector(collector) returns (bool) {
+function addCollector(address collector) public OnlyNewCollector(collector) returns (address) {
     // create new contract
         collectors[collector] = address(new UserWallet(collector,orgRegistry));
 
-    return true;
+    return collectors[collector];
 }
-function addBusinessPartner(address businessPartner) public OnlyBusinessPartner(businessPartner) returns (bool) {
+function addBusinessPartner(address businessPartner) public OnlyBusinessPartner(businessPartner) returns (address) {
     // create new contract
     businessPartners[businessPartner] = address(new BusinessPartnerWallet(businessPartner));
-    return true;
+    return     businessPartners[businessPartner] ;
 }
 // function approve() public onlyAdmin() returns (bool) {
     
