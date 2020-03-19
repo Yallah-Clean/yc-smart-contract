@@ -989,7 +989,7 @@
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {
-    "3": {
+    "1851487670": {
       "events": {
         "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6": {
           "anonymous": false,
@@ -1001,8 +1001,7 @@
             }
           ],
           "name": "MinterAdded",
-          "type": "event",
-          "signature": "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6"
+          "type": "event"
         },
         "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692": {
           "anonymous": false,
@@ -1014,8 +1013,7 @@
             }
           ],
           "name": "MinterRemoved",
-          "type": "event",
-          "signature": "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692"
+          "type": "event"
         },
         "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
           "anonymous": false,
@@ -1037,8 +1035,7 @@
             }
           ],
           "name": "Transfer",
-          "type": "event",
-          "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+          "type": "event"
         },
         "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
           "anonymous": false,
@@ -1060,18 +1057,17 @@
             }
           ],
           "name": "Approval",
-          "type": "event",
-          "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+          "type": "event"
         }
       },
       "links": {},
-      "address": "0x68377d3D76E6B0590E963d9185789cA4F5484199",
-      "transactionHash": "0xbb58626d169bdda925c13b847befeda83be8922e0db3cfae4e9f9f68265c71f9"
+      "address": "0xA575c649a337C907e3777F79E98a964E656A66c5",
+      "transactionHash": "0xcd7a5c5be4f3c8d314d6ed9cd9697f1b9942dc9c54f51004eda86d6d70279579"
     }
   },
-  "schemaVersion": "3.0.21",
-  "updatedAt": "2020-03-14T16:30:08.239Z",
-  "networkType": "ethereum",
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-03-19T03:34:46.267Z",
+  "networkType": "quorum",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {

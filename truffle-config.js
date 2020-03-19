@@ -17,6 +17,7 @@
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
+var Web3 = require('web3');
 
 const PrivateKeyProvider = require("@truffle/hdwallet-provider");
 const infuraKey = "a30f44f7f6de4a7dbe4c9ad2eea7420e";
@@ -68,7 +69,17 @@ module.exports = {
       timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
-
+    kaleido: {
+      provider: () => {
+        const appCred = 'yourappcred'; // from application credential widget
+        const connectionURL = 'nodeConnectionURL'; // without protocol (https://)
+        return new Web3.providers.HttpProvider(`https://${appCred}@${connectionURL}`);
+      },
+      network_id: "*", // Match any network id
+      gasPrice: 0,
+      gas: 8500000,
+       type: 'quorum' // Use this property for Quorum environments 
+    },
     // Useful for private networks
     // private: {
       // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),

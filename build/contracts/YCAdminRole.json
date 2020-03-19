@@ -2530,7 +2530,7 @@
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {
-    "3": {
+    "1851487670": {
       "events": {
         "0xe6247dc7338f27550b438c6a820e8bd3b2cc07da8b566ab74d47ed7926b0ab85": {
           "anonymous": false,
@@ -2542,8 +2542,7 @@
             }
           ],
           "name": "YCAdminAdded",
-          "type": "event",
-          "signature": "0xe6247dc7338f27550b438c6a820e8bd3b2cc07da8b566ab74d47ed7926b0ab85"
+          "type": "event"
         },
         "0x846b5a39f613a3fe02f35f81e396371a588a10f334cadd89425b1d1b394d5276": {
           "anonymous": false,
@@ -2555,18 +2554,17 @@
             }
           ],
           "name": "YCAdminRemoved",
-          "type": "event",
-          "signature": "0x846b5a39f613a3fe02f35f81e396371a588a10f334cadd89425b1d1b394d5276"
+          "type": "event"
         }
       },
       "links": {},
-      "address": "0xB2B45b856c4f68EBc4295598A784fDf224Ffc79F",
-      "transactionHash": "0x902dd0ae6eecfd04710c9029cfccb890d268a1300c3d9314610b034f8e93a624"
+      "address": "0xdCe29987fe1810B0fe331b2325F2507D6045b3B8",
+      "transactionHash": "0xd842a21f81ce3dcb59c753935fc395e7d667c29287074a98150c0e06d6038300"
     }
   },
-  "schemaVersion": "3.0.21",
-  "updatedAt": "2020-03-14T16:30:08.233Z",
-  "networkType": "ethereum",
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-03-19T03:34:46.263Z",
+  "networkType": "quorum",
   "devdoc": {
     "methods": {}
   },

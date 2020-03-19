@@ -8089,8 +8089,8 @@
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.21",
-  "updatedAt": "2020-03-14T16:25:06.277Z",
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-03-19T02:57:26.732Z",
   "devdoc": {
     "methods": {
       "isOwner()": {
